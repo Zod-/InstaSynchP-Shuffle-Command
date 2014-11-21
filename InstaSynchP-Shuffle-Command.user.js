@@ -3,7 +3,7 @@
 // @namespace   InstaSynchP
 // @description Command to shuffle the playlist
 
-// @version     1.0.2
+// @version     1.0.3
 // @author      Zod-
 // @source      https://github.com/Zod-/InstaSynchP-Shuffle-Command
 // @license     MIT
@@ -33,18 +33,16 @@ function Shuffle(version) {
     };
 }
 
-Shuffle.prototype.execute = function () {
+Shuffle.prototype.execute = function (opts) {
     "use strict";
-    var userList = [],
+    var userList = opts.usernames,
         i,
         tempList = [],
         all = false;
 
     for (i = 1; i < arguments.length; i += 1) {
-        if (arguments[i] === 'all') {
-            all = true;
-        } else if (isBlackname(arguments[i])) {
-            userList.push(arguments[i].toLowerCase());
+        switch(arguments[i]){
+            case 'all': all = true; break;
         }
     }
     i = all ? 0 : activeVideoIndex() + 1;
@@ -69,4 +67,4 @@ Shuffle.prototype.execute = function () {
 };
 
 window.plugins = window.plugins || {};
-window.plugins.shuffle = new Shuffle('1.0.2');
+window.plugins.shuffle = new Shuffle('1.0.3');
