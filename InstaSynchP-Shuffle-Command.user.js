@@ -3,7 +3,7 @@
 // @namespace   InstaSynchP
 // @description Command to shuffle the playlist
 
-// @version     1.0.3
+// @version     1.0.4
 // @author      Zod-
 // @source      https://github.com/Zod-/InstaSynchP-Shuffle-Command
 // @license     MIT
@@ -15,7 +15,7 @@
 // @grant       none
 // @run-at      document-start
 
-// @require     https://greasyfork.org/scripts/5647-instasynchp-library/code/InstaSynchP%20Library.js
+// @require     https://greasyfork.org/scripts/5647-instasynchp-library/code/InstaSynchP%20Library.js?version=37716
 // ==/UserScript==
 
 function Shuffle(version) {
@@ -38,7 +38,8 @@ Shuffle.prototype.execute = function (opts) {
   var userList = opts.usernames,
     i, video,
     tempList = [],
-    all = false;
+    all = false,
+    playlist = window.room.playlist;
 
   for (i = 1; i < arguments.length; i += 1) {
     switch (arguments[i]) {
@@ -50,8 +51,8 @@ Shuffle.prototype.execute = function (opts) {
   i = all ? 0 : activeVideoIndex() + 1;
 
   //save all the videos with their index
-  for (; i < window.playlist.length; i += 1) {
-    video = window.playlist[i];
+  for (; i < playlist.videos.length; i += 1) {
+    video = playlist.videos[i];
     if (userList.length === 0 || userList.indexOf(video.addedby.toLowerCase()) !== -1) {
       tempList.push({
         i: i,
@@ -62,7 +63,7 @@ Shuffle.prototype.execute = function (opts) {
 
   //move the videos to the position of another video in the list
   for (i = 0; i < tempList.length; i += 1) {
-    window.global.sendcmd('move', {
+    sendcmd('move', {
       info: tempList[i].info,
       position: tempList[Math.floor(Math.random() * tempList.length)].i
     });
@@ -70,4 +71,4 @@ Shuffle.prototype.execute = function (opts) {
 };
 
 window.plugins = window.plugins || {};
-window.plugins.shuffle = new Shuffle('1.0.3');
+window.plugins.shuffle = new Shuffle('1.0.4');
