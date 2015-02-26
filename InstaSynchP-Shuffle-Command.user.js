@@ -3,15 +3,13 @@
 // @namespace   InstaSynchP
 // @description Command to shuffle the playlist
 
-// @version     1.0.4
+// @version     1.0.5
 // @author      Zod-
 // @source      https://github.com/Zod-/InstaSynchP-Shuffle-Command
 // @license     MIT
 
-// @include     http://*.instasynch.com/*
-// @include     http://instasynch.com/*
-// @include     http://*.instasync.com/*
-// @include     http://instasync.com/*
+// @include     *://instasync.com/r/*
+// @include     *://*.instasync.com/r/*
 // @grant       none
 // @run-at      document-start
 
@@ -71,4 +69,4 @@ Shuffle.prototype.execute = function (opts) {
 };
 
 window.plugins = window.plugins || {};
-window.plugins.shuffle = new Shuffle('1.0.4');
+window.plugins.shuffle = new Shuffle('1.0.5');
